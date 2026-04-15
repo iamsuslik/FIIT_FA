@@ -82,23 +82,23 @@ internal struct TreeIterator<TKey, TValue, TNode> :
             return curr;
         }
 
-        // InOrderReverse (П-К-Л) и PreOrderReverse (П-Л-К)
-        else if (strategy == TraversalStrategy.InOrderReverse || strategy == TraversalStrategy.PreOrderReverse)
+        // InOrderReverse (П-К-Л) и PostOrderReverse (П-Л-К)
+        else if (strategy == TraversalStrategy.InOrderReverse || strategy == TraversalStrategy.PostOrderReverse)
         {
             while (curr.Right != null)
             {
                 curr = curr.Right;
             }
 
-            if (strategy == TraversalStrategy.PreOrderReverse && curr.Left != null)
+            if (strategy == TraversalStrategy.PostOrderReverse && curr.Left != null)
             {
                 return GetFirstNode(curr.Left, strategy);
             }
             return curr;
         }
 
-        // PreOrder (К-Л-П) и PostOrderReverse (К-П-Л)
-        else if (strategy == TraversalStrategy.PreOrder || strategy == TraversalStrategy.PostOrderReverse)
+        // PreOrder (К-Л-П) и PreOrderReverse (К-П-Л)
+        else if (strategy == TraversalStrategy.PreOrder || strategy == TraversalStrategy.PreOrderReverse)
         {
             return root;
         }
@@ -178,7 +178,7 @@ internal struct TreeIterator<TKey, TValue, TNode> :
             return null;
         }
 
-        else if (strategy == TraversalStrategy.PostOrderReverse)
+        else if (strategy == TraversalStrategy.PreOrderReverse)
         {
             if (node.Right != null)
             {
@@ -225,9 +225,9 @@ internal struct TreeIterator<TKey, TValue, TNode> :
             return resPost;
         }
 
-        else if (strategy == TraversalStrategy.PreOrderReverse)
+        else if (strategy == TraversalStrategy.PostOrderReverse)
         {
-             TNode? par = node.Parent;
+            TNode? par = node.Parent;
             if (par == null)
             {
                 return null;
